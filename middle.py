@@ -5,8 +5,7 @@ def set_entry_data(root):
     data_dict = {
         "stations": root.get_washing_stations(),
         "simulation-time": root.get_simulation_time(),
-        "simulation-day": root.get_simulation_day(),
-        "wash-type": root.get_wash_type()
+        "simulation-day": root.get_simulation_day()
     }
     set_simpy_env()
 def get_entry_data()->dict:
