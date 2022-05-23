@@ -1,0 +1,21 @@
+definimos_dias_habiles
+definimos_numero_trabajadores
+estaciones_de_lavado=3
+cantidad_de_vehiculos = cada 30min[L~J] | cada 15min [V~D]
+coches_por_dia = L ~ J [Max 15]
+                 V ~ D [Max 30]
+trabajadores_por_dia = L ~ J [Max 4]
+                       V ~ D [Max 6]
+trabajadores_disponibles = [2]
+tipos de vehiculos = (Coche=15min, camioneta=30min, moto=7min)
+tipo_de_lavado = (Lavado normal=Estandar del vehiculo, 
+                lavado y engrasado=Aumenta 5min al estandar, 
+                lavado de vestiduras=Aumenta al doble el estandar,
+                lavado de motor=Aumenta al doble el estandar)
+
+si estaciones_de_lavado.hay_disponible():
+    trabajadores_disponibles -1 si trabajadores_disponibles >0
+    estaciones_de_lavado -1 
+    tiempo_de_lavado= obtener_tiempo(tipo_de_vehiculo, tipo_de_lavado)
+
+AL FINALIZAR EL LAVADO 
