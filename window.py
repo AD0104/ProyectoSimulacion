@@ -37,6 +37,22 @@ class MainWindow(tk.Tk):
         current_simulation_day.current(newindex=0)
         current_simulation_day.grid(column=1, row=2, padx=general_padx, pady=general_pady)
         tk.Button(self, text="Guardar", command=self.transport_data).grid(column=0, row=3, columnspan=2, padx=general_padx, pady=general_pady)
+
+        tk.Label(self, text="Llegada al autolavado").grid(column=3, row=0, padx=general_padx, pady=general_pady)
+        arriving_text_area = tk.Text(self, height=10, width=150)
+        arriving_text_area['state']='disabled'
+        arriving_text_area.grid(column=2, row=0, padx=general_padx, pady=general_pady)
+
+        tk.Label(self, text="Entrada a lavado").grid(column=3, row=1, padx=general_padx, pady=general_pady)
+        entry_wash_text_area = tk.Text(self, height=10, width=150)
+        entry_wash_text_area['state']='disabled'
+        entry_wash_text_area.grid(column=2, row=1, padx=general_padx, pady=general_pady)
+
+        tk.Label(self, text="Salida del lavado").grid(column=3, row=3, padx=general_padx, pady=general_pady)
+        out_wash_text_area = tk.Text(self, height=10, width=150)
+        out_wash_text_area['state']='disabled'
+        out_wash_text_area.grid(column=2, row=3, padx=general_padx, pady=general_pady)
+
         self.mainloop()
 
     def get_washing_stations(self)->int:
