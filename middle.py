@@ -1,6 +1,7 @@
+from tkinter import END
 from simpy.core import Environment
 from  simpy_config import configuracion
-from simpy_config import get_times
+from simpy_config import get_times, get_arrival_messages, get_entry_messages, get_out_messages
 def set_entry_data(root):
     global data_dict
     data_dict = {
@@ -16,6 +17,12 @@ def set_simulation_times(times: dict)->None:
     sim_times = times
 def get_simulation_times()->dict:
     return sim_times
+def get_arriving_text()->list:
+    return get_arrival_messages()
+def get_entry_text()->list:
+    return get_entry_messages()
+def get_out_text()->list:
+    return get_out_messages()
 def set_simpy_env():
     env = Environment()
     general_data = get_entry_data()

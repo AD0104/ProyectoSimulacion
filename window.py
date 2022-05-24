@@ -1,7 +1,7 @@
-from tkinter import StringVar, Tk
+from tkinter import StringVar, Tk, END
 from tkinter import ttk
 import tkinter as tk
-from middle import set_entry_data 
+from middle import set_entry_data, get_arriving_text, get_entry_text, get_out_text 
 class MainWindow(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -39,19 +39,19 @@ class MainWindow(tk.Tk):
         tk.Button(self, text="Guardar", command=self.transport_data).grid(column=0, row=3, columnspan=2, padx=general_padx, pady=general_pady)
 
         tk.Label(self, text="Llegada al autolavado").grid(column=3, row=0, padx=general_padx, pady=general_pady)
-        arriving_text_area = tk.Text(self, height=10, width=150)
-        arriving_text_area['state']='disabled'
-        arriving_text_area.grid(column=2, row=0, padx=general_padx, pady=general_pady)
+        self.arriving_text_area = tk.Text(self, height=10, width=150)
+        self.arriving_text_area['state']='disabled'
+        self.arriving_text_area.grid(column=2, row=0, padx=general_padx, pady=general_pady)
 
         tk.Label(self, text="Entrada a lavado").grid(column=3, row=1, padx=general_padx, pady=general_pady)
-        entry_wash_text_area = tk.Text(self, height=10, width=150)
-        entry_wash_text_area['state']='disabled'
-        entry_wash_text_area.grid(column=2, row=1, padx=general_padx, pady=general_pady)
+        self.entry_wash_text_area = tk.Text(self, height=10, width=150)
+        self.entry_wash_text_area['state']='disabled'
+        self.entry_wash_text_area.grid(column=2, row=1, padx=general_padx, pady=general_pady)
 
         tk.Label(self, text="Salida del lavado").grid(column=3, row=3, padx=general_padx, pady=general_pady)
-        out_wash_text_area = tk.Text(self, height=10, width=150)
-        out_wash_text_area['state']='disabled'
-        out_wash_text_area.grid(column=2, row=3, padx=general_padx, pady=general_pady)
+        self.out_wash_text_area = tk.Text(self, height=10, width=150)
+        self.out_wash_text_area['state']='disabled'
+        self.out_wash_text_area.grid(column=2, row=3, padx=general_padx, pady=general_pady)
 
         self.mainloop()
 
@@ -80,5 +80,39 @@ class MainWindow(tk.Tk):
         tk.Button(popup, text="Aceptar", command=popup.destroy).pack()
     def get_simulation_day(self):
         return self.current_var_simday.get()
+    def update_arriving_ta(self, text):
+        self.arriving_text_area['state']='normal'
+        self.arriving_text_area.delete(1.0, "end")
+        self.arriving_text_area.insert("end", text)
+        self.arriving_text_area['state']='disabled'
+    def update_entry_ta(self, text):
+        self.entry_wash_text_area['state']='normal'
+        self.entry_wash_text_area.delete(1.0, 'end')
+        self.entry_wash_text_area.insert('end', text)
+        self.entry_wash_text_area['state']='disabled'
+    def update_out_ta(self, text):
+        self.out_wash_text_area['state']='normal'
+        self.out_wash_text_area.delete(1.0, 'end')
+        self.out_wash_text_area.insert('end', text)
+        self.out_wash_text_area['state']='disabled'
     def transport_data(self):
         set_entry_data(self)
+        text = get_arriving_text()
+        send_text = ""
+        for curr_text in text:
+            send_text+=curr_text
+            send_text+='\n'
+        self.update_arriving_ta(send_text)
+        send_text=""
+        text=get_entry_text()
+        for curr_text in text:
+            send_text+=curr_text
+            send_text+='\n'
+        self.update_entry_ta(send_text)
+        send_text=""
+        text=get_out_text()
+        for curr_text in text:
+            send_text+=curr_text
+            send_text+='\n'
+        self.update_out_ta(send_text)
+
