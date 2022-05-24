@@ -1,8 +1,8 @@
 from tkinter import END
 from simpy.core import Environment
-from  simpy_config import configuracion
-from simpy_config import get_times, get_arrival_messages, get_entry_messages, get_out_messages
-from simpy_config import get_times
+from model.simpy_config import configuracion
+from model.simpy_config import get_times, get_arrival_messages, get_entry_messages, get_out_messages
+from model.simpy_config import get_times
 def set_entry_data(root):
     global data_dict
     data_dict = {

@@ -2,9 +2,8 @@ from tkinter import StringVar, Tk, END, NORMAL
 from tkinter import Text
 from tkinter import ttk
 import tkinter as tk
-from turtle import heading
-from middle import set_entry_data, get_arriving_text, get_entry_text, get_out_text 
-from middle import get_simulation_times
+from controller.middle import set_entry_data, get_arriving_text, get_entry_text, get_out_text 
+from controller.middle import get_simulation_times
 class MainWindow(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)

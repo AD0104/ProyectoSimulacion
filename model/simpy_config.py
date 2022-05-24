@@ -1,8 +1,8 @@
 from random import randint
 import simpy
 from simpy.core import Environment
-from carwash import AutoLavado
-from project_constants import Constants
+from model.carwash import AutoLavado
+from model.project_constants import Constants
 
 car_time_list = [0]
 bike_time_list = [0]
