@@ -3,7 +3,7 @@ from tkinter import Text
 from tkinter import ttk
 import tkinter as tk
 from controller.middle import set_entry_data, get_arriving_text, get_entry_text, get_out_text 
-from controller.middle import get_simulation_times
+from controller.middle import get_simulation_times, set_clean_lists
 class MainWindow(tk.Tk):
     def __init__(self):
         tk.Tk.__init__(self)
@@ -86,6 +86,7 @@ class MainWindow(tk.Tk):
         return int(entry_value)
     def spawn_popup(self):
         popup = tk.Toplevel(self)
+        popup.geometry("150x150")
         popup.wm_title("Error")
         tk.Label(popup, text="Campo vacio").pack(side='top', fill='x', pady=10)
         tk.Button(popup, text="Aceptar", command=popup.destroy).pack()
@@ -107,6 +108,7 @@ class MainWindow(tk.Tk):
         self.out_wash_text_area.delete('0.0', END)
         self.total_time.delete('0.0',END)
         self.average_time.delete('0.0', END)
+        set_clean_lists()
 
     def transport_data(self):
         set_entry_data(self)

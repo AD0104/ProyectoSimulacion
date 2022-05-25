@@ -2,7 +2,7 @@ from tkinter import END
 from simpy.core import Environment
 from model.simpy_config import configuracion
 from model.simpy_config import get_times, get_arrival_messages, get_entry_messages, get_out_messages
-from model.simpy_config import get_times
+from model.simpy_config import get_times, set_time_lists
 def set_entry_data(root):
     global data_dict
     data_dict = {
@@ -25,6 +25,9 @@ def get_entry_text()->list:
     return get_entry_messages()
 def get_out_text()->list:
     return get_out_messages()
+def set_clean_lists()->None:
+    print("cleaning...")
+    set_time_lists([0])
 def set_simpy_env():
     env = Environment()
     general_data = get_entry_data()

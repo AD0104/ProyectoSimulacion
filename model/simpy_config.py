@@ -38,16 +38,15 @@ def set_time_lists(new_list: list)->None:
     car_time_list = new_list
     bike_time_list = new_list
     truck_time_list = new_list
+    print("cleaned lists")
 def add_car_time(car_time: int)-> None:
-    print("Its a car")
     car_time_list.append(car_time)
 def add_bike_time(bike_time: int)-> None:
-    print("Its a bike")
     bike_time_list.append(bike_time)
 def add_truck_time(truck_time: int)-> None:
-    print("Its a truck")
     truck_time_list.append(truck_time)
 def get_times()->dict:
+    print(f"car: {car_time_list}\nbike: {bike_time_list}\ntruck: {truck_time_list}")
     dt = {
         "car-total-time": sum(car_time_list),
         "car-average-time": sum(car_time_list)/len(car_time_list),
