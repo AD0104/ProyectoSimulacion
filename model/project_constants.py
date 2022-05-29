@@ -5,13 +5,20 @@ class Constants():
         #8HRS = 480min
         self.DIAS=["Martes","Miercoles","Jueves","Viernes","Sabado","Domingo"]
         self.TIEMPO_ENTRE_VEHICULO=[30,15]
-        self.COCHES_MAX_DIA=[15,30]
-        self.TIPO_LAVADO=[
-            "Lavado Normal",
-            "Lavado y engrasado",
-            "Lavado de vestiduras",
-            "Lavado de motor"
-        ]
+        self.COCHES_MAX_DIA={
+                "Martes": 15,
+                "Miercoles": 15,
+                "Jueves": 15,
+                "Viernes": 30,
+                "Sabado": 30,
+                "Domingo": 30
+            }
+        self.TIPO_LAVADO={
+                "Lavado Normal": 1,
+                "Lavado y engrasado": .10,
+                "Lavado de vestiduras": 2,
+                "Lavado de motor": 2
+            }
         self.TIPOS_VEHICULOS={
             "Coche": 15,
             "Camioneta":30,
@@ -29,8 +36,10 @@ class Constants():
         return self.DIAS
     def get_timeout(self) -> list:
         return self.TIEMPO_ENTRE_VEHICULO
-    def get_max_cars(self)->list:
+    def get_max_cars(self)->dict:
         return self.COCHES_MAX_DIA
     def get_vehicle_type(self)->dict:
         return self.TIPOS_VEHICULOS
+    def get_washing_type(self)->dict:
+        return self.TIPO_LAVADO
 

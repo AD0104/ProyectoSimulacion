@@ -1,5 +1,8 @@
-from flask import Flask, render_template
+from urllib import response
+from flask import Flask, render_template, jsonify, make_response
 from flask import request
+from controller.middle import set_simpy_env
+from controller.middle import get_arriving_text, get_entry_text, get_out_text
 
 app = Flask(__name__, static_folder="./static", template_folder="./templates")
 
@@ -7,12 +10,18 @@ app = Flask(__name__, static_folder="./static", template_folder="./templates")
 def index():
     return render_template('index.html')
 
-@app.route('/get-form-data', methods=['POST'])
+@app.route('/get-form-data', methods=['GET', 'POST'])
 def get_simulation_config_parameters():
-    print(request.form)
-    print(f"Washing Stations: {request.form['washing-stations']}")
-    # washing_stations = request.form['washing-stations']
-    # simulation_time = request.form.get('simulation-time')
-    # simulation_day = request.form.get('simulation-day')
-    # print(f"{washing_stations}\n{simulation_time}\n{simulation_day}")
-    return index()
+    form_data = request.get_json()
+    set_simpy_env(form_data=form_data)
+    messages = {
+        "arrivals": get_arriving_text(),
+        "entrys": get_entry_text(),
+        "outs": get_out_text()
+    }
+    response = make_response(
+        jsonify(
+            messages
+        )
+    )
+    return response
