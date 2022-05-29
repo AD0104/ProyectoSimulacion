@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <title>Test</title>
+</head>
+<body>
+    <form action="" id="sim-form">
+        <input type="text" placeholder="Estaciones de lavado" id="washing-stations-entry">
+        <input type="text" placeholder="Tiempo de simulacion" id="simulation-time-entry">
+        <select name="simulation-day" id="sim-day">
+            <option value="Martes">Martes</option>
+            <option value="Miercoles">Miercoles</option>
+            <option value="Jueves">Jueves</option>
+            <option value="Viernes">Viernes</option>
+            <option value="Sabado">Sabado</option>
+            <option value="Domingo">Domingo</option>
+        </select>
+        <button type="submit" id="submit-form">Enviar</button>
+    </form>
+    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
+</body>
+</html>
