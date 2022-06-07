@@ -94,14 +94,15 @@ def get_times()->dict:
 """
 def generar_vehiculo()-> tuple:
     llaves_diccionario_vehiculos = ["Coche", "Camioneta", "Moto"]
-    llaves_diccionario_lavados = ["Lavado Normal", "Lavado y engrasado", "Lavado de vestiduras", "Lavado de motor"] 
     idx_llave_diccionario_vehiculos = randint(0,2)
-    idx_llave_diccionario_lavados = randint(0,3)
-    llave_lavados = llaves_diccionario_lavados[idx_llave_diccionario_lavados]
     llave_vehiculos = llaves_diccionario_vehiculos[idx_llave_diccionario_vehiculos]
-    tiempo_lavado = Constants().get_washing_type()[llave_lavados]
     tiempo_vehiculo = Constants().get_vehicle_type()[llave_vehiculos]
 
+    llaves_diccionario_lavados = ["Lavado Normal", "Lavado y engrasado", "Lavado de vestiduras", "Lavado de motor"] 
+    idx_llave_diccionario_lavados = randint(0,3)
+    llave_lavados = llaves_diccionario_lavados[idx_llave_diccionario_lavados]
+    tiempo_lavado = Constants().get_washing_type()[llave_lavados]
+    
     return (tiempo_vehiculo+(tiempo_vehiculo*tiempo_lavado)), llave_vehiculos
 
 """
@@ -111,12 +112,19 @@ def generar_vehiculo()-> tuple:
 def configuracion(env: Environment, numero_estaciones: int, dia: str, trabajadores: int):
     autolavado = AutoLavado(env, numero_estaciones, trabajadores)
     coches_generados, coches_maximos = 0, Constants().get_max_cars()[dia]
-    for i in range(0,4):
+    llave=""
+    i=0
+    while(i < 4):
         tiempo_lavado, llave = generar_vehiculo()
         autolavado.set_tiempo(tiempo_lavado)
         current_vehicle = f"{llave} {i}" 
         env.process(car(env, current_vehicle, autolavado))
+        i+=1
     while(coches_generados <= coches_maximos):
         yield env.timeout(randint(1, 5))
+        tiempo_lavado, llave = generar_vehiculo()
+        autolavado.set_tiempo(tiempo_lavado)
+        current_vehicle = f"{llave} {i}"
+        env.process(car(env, current_vehicle, autolavado))
         coches_generados+=1
-        env.process(car(env, f"{llave} {i}", autolavado))
+        i+=1
