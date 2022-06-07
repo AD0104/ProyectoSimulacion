@@ -1,0 +1,140 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  font-family: "Space Mono", "sans-serif";
+  background: hsl(185, 41%, 84%);
+}
+.container {
+  width: 100%;
+  max-width: 700px;
+  border-radius: 15px;
+  background: hsl(189, 41%, 97%);
+}
+
+.form_section {
+  padding: 20px;
+}
+.form_section > form {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.input,
+.button,
+.select {
+  width: 100%;
+  padding: 0.8rem;
+  font-size: 0.8rem;
+  border-radius: 0.3rem;
+  outline: 1px solid gray;
+  border: none;
+  caret-color: hsl(172, 67%, 45%);
+}
+.input:focus {
+  outline: 2px solid hsl(172, 67%, 45%);
+}
+
+input[type="number"]::-webkit-inner-spin-button,
+input[type="number"]::-webkit-outer-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+@media screen and (min-width: 700px) {
+  .container {
+    display: flex;
+    position: relative;
+    z-index: 200;
+  }
+
+  .form_section,
+  .data_section {
+    width: 50%;
+  }
+
+  .data_section {
+    padding: 15px;
+    height: 55vh;
+    background: hsl(225, 57%, 58%);
+    font-size: 0.7rem;
+    border-bottom-right-radius: 0.3rem;
+    border-top-right-radius: 0.3rem;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    overflow-y: scroll;
+  }
+  .data_radios {
+    position: absolute;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    right: 0px;
+    top: 10px;
+    z-index: -1;
+  }
+
+  .radio_section {
+    position: relative;
+    width: 100%;
+  }
+  .radio {
+    display: block;
+    position: absolute;
+    opacity: 0.011;
+    z-index: 100;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+  }
+  .label {
+    display: block;
+    padding: 10px 5px 10px 10px;
+    width: 100%;
+    border-bottom-right-radius: 10px;
+    border-top-right-radius: 10px;
+    top: 0;
+    right: 0;
+    left: 0;
+    bottom: 0;
+    z-index: 90;
+    background: hsl(172, 67%, 45%);
+    cursor: pointer;
+  }
+  .label:hover {
+    background-color: hsl(183, 100%, 15%);
+    color: white;
+  }
+  .checked {
+    background-color: hsl(183, 100%, 15%);
+    color: white;
+  }
+  .toggleRadios {
+    transform: translateX(95px);
+    z-index: 0;
+    transition-property: transform, z-index;
+    transition-duration: 0.5s, 1s;
+    transition-delay: 0s, 0.5s;
+  }
+  .parrafo {
+    animation: fadeIn 0.5s ease 0s 1;
+  }
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+  }
+  100% {
+    opacity: 1;
+  }
+}

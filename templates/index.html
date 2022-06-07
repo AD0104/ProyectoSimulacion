@@ -1,27 +1,81 @@
 <!DOCTYPE html>
 <html lang="es">
-<head>
-    <meta charset="UTF-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/axios/dist/axios.min.js"></script>
+    <link
+      rel="stylesheet"
+      href="{{ url_for('static', filename='css/styles.css')}}"
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@700&display=swap"
+      rel="stylesheet"
+    />
     <title>Test</title>
-</head>
-<body>
-    <form action="" id="sim-form">
-        <input type="text" placeholder="Estaciones de lavado" id="washing-stations-entry">
-        <input type="text" placeholder="Tiempo de simulacion" id="simulation-time-entry">
-        <input type="text" placeholder="Trabajadores" id="workers">
-        <select name="simulation-day" id="sim-day">
+  </head>
+  <body>
+    <!--  <header>
+      <h1>Car-Wash <br /></h1>
+    </header> -->
+    <main class="container">
+      <section class="form_section">
+        <form action="" id="sim-form">
+          <label>Estaciones de lavado</label>
+          <input
+            type="number"
+            placeholder="Estaciones de lavado"
+            id="washing-stations-entry"
+            class="input"
+          />
+          <label>Tiempo de simulacion</label>
+          <input
+            type="number"
+            placeholder="Tiempo de simulacion"
+            id="simulation-time-entry"
+            class="input"
+          />
+          <label for="">Trabajadores</label>
+          <input
+            type="number"
+            placeholder="Trabajadores"
+            id="workers"
+            class="input"
+          />
+          <select name="simulation-day" id="sim-day" class="select">
             <option value="Martes">Martes</option>
             <option value="Miercoles">Miercoles</option>
             <option value="Jueves">Jueves</option>
             <option value="Viernes">Viernes</option>
             <option value="Sabado">Sabado</option>
             <option value="Domingo">Domingo</option>
-        </select>
-        <button type="submit" id="submit-form">Enviar</button>
-    </form>
-    <script src="{{ url_for('static', filename='js/app.js') }}"></script>
-</body>
+          </select>
+          <button type="submit" id="submit-form" class="button">Enviar</button>
+        </form>
+      </section>
+      <section class="data_section"></section>
+      <div class="data_radios">
+        <div class="radio_section">
+          <input type="radio" id="llegadas" class="radio" />
+          <label for="llegadas" class="label"> Llegadas </label>
+        </div>
+        <div class="radio_section">
+          <input type="radio" id="entradas" class="radio" />
+          <label for="entradas" class="label"> Entradas </label>
+        </div>
+        <div class="radio_section">
+          <input type="radio" id="salidas" class="radio" />
+          <label for="salidas" class="label"> Salidas </label>
+        </div>
+      </div>
+    </main>
+    <script
+      type="module"
+      src="{{ url_for('static', filename='js/app.js') }}"
+    ></script>
+  </body>
 </html>

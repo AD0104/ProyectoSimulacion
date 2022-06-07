@@ -1,4 +1,3 @@
-from tkinter import END
 from simpy.core import Environment
 from model.simpy_config import configuracion
 from model.simpy_config import get_arrival_messages, get_entry_messages, get_out_messages
