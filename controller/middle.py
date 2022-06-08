@@ -12,6 +12,10 @@ def get_entry_text()->list:
 
 def get_out_text()->list:
     return get_out_messages()
+def get_sim_times()->dict:
+    return get_times()
+def clear_lists():
+    set_time_lists()
     
 def set_simpy_env(form_data: dict):
     env = Environment()
@@ -22,5 +26,3 @@ def set_simpy_env(form_data: dict):
                     int(form_data['workers'])
                 ))
     env.run(until=int(form_data['simulation-time']))
-    get_times()
-    set_time_lists()
