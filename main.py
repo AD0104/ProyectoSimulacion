@@ -22,7 +22,6 @@ def get_simulation_config_parameters():
     }
     average_times = get_sim_times()
     messages.update(average_times)
-    print(messages)
     response = make_response(
         jsonify(
             messages

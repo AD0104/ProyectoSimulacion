@@ -16,13 +16,13 @@ outs = []
     a new car is generated.
 """
 def car(env: Environment, nombre:str, atl: AutoLavado):
-    arrivals.append(f"{nombre} llego al autolavado a las {env.now}")
+    arrivals.append(f"{nombre} llego al autolavado a los {env.now} minutos")
     with atl.estaciones.request() as request:
         yield request
         with atl.trabajadores.request() as t_request:
             yield t_request
             
-            entrys.append(f"{nombre} entro al autolavado a las {env.now}")
+            entrys.append(f"{nombre} entro al autolavado a los {env.now} minutos")
             
             yield env.process(atl.lavar())
             
@@ -34,7 +34,7 @@ def car(env: Environment, nombre:str, atl: AutoLavado):
             else:
                 add_truck_time(int(time))
             
-            outs.append(f"{nombre} salio del autolavado a las {time}")
+            outs.append(f"{nombre} salio del autolavado a los {time} minutos")
 
 """
     The following functions were created to get the messages thrown by the
@@ -78,12 +78,12 @@ def add_truck_time(truck_time: int)-> None:
 """
 def get_times()->dict:
     dt = {
-        "car-total-time": sum(car_time_list),
-        "car-average-time": sum(car_time_list)/len(car_time_list),
-        "bike-total-time": sum(bike_time_list),
-        "bike-average-time": sum(bike_time_list)/len(bike_time_list),
-        "truck-total-time": sum(truck_time_list),
-        "truck-average-time": sum(truck_time_list)/len(truck_time_list)
+        "car-total-time": str(sum(car_time_list))+" minutos",
+        "car-average-time": str(sum(car_time_list)/len(car_time_list))+" minutos",
+        "bike-total-time": str(sum(bike_time_list))+" minutos",
+        "bike-average-time": str(sum(bike_time_list)/len(bike_time_list))+" minutos",
+        "truck-total-time": str(sum(truck_time_list))+" minutos",
+        "truck-average-time": str(sum(truck_time_list)/len(truck_time_list))+" minutos"
     }
     return dt
 
@@ -103,7 +103,7 @@ def generar_vehiculo()-> tuple:
     llave_lavados = llaves_diccionario_lavados[idx_llave_diccionario_lavados]
     tiempo_lavado = Constants().get_washing_type()[llave_lavados]
     
-    return (tiempo_vehiculo+(tiempo_vehiculo*tiempo_lavado)), llave_vehiculos
+    return (tiempo_vehiculo+(tiempo_vehiculo*tiempo_lavado)), llave_vehiculos, llave_lavados
 
 """
     We generate 4 inicial vehicles, then we keep generating and adding cars to the yield while the
@@ -112,19 +112,18 @@ def generar_vehiculo()-> tuple:
 def configuracion(env: Environment, numero_estaciones: int, dia: str, trabajadores: int):
     autolavado = AutoLavado(env, numero_estaciones, trabajadores)
     coches_generados, coches_maximos = 0, Constants().get_max_cars()[dia]
-    llave=""
     i=0
     while(i < 4):
-        tiempo_lavado, llave = generar_vehiculo()
+        tiempo_lavado, tipo_coche, tipo_lavado = generar_vehiculo()
         autolavado.set_tiempo(tiempo_lavado)
-        current_vehicle = f"{llave} {i}" 
+        current_vehicle = f"{tipo_coche} {i} [{tipo_lavado}]" 
         env.process(car(env, current_vehicle, autolavado))
         i+=1
     while(coches_generados <= coches_maximos):
         yield env.timeout(randint(1, 5))
-        tiempo_lavado, llave = generar_vehiculo()
+        tiempo_lavado, tipo_coche, tipo_lavado = generar_vehiculo()
         autolavado.set_tiempo(tiempo_lavado)
-        current_vehicle = f"{llave} {i}"
+        current_vehicle = f"{tipo_coche} {i} [{tipo_lavado}]"
         env.process(car(env, current_vehicle, autolavado))
         coches_generados+=1
         i+=1
