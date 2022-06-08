@@ -13,7 +13,7 @@ body {
 }
 .container {
   width: 100%;
-  max-width: 700px;
+  max-width: 800px;
   border-radius: 15px;
   background: hsl(189, 41%, 97%);
 }
@@ -63,7 +63,6 @@ input[type="number"]::-webkit-outer-spin-button {
   .data_section {
     padding: 15px;
     height: 55vh;
-    background: hsl(225, 57%, 58%);
     font-size: 0.7rem;
     border-bottom-right-radius: 0.3rem;
     border-top-right-radius: 0.3rem;
@@ -80,6 +79,7 @@ input[type="number"]::-webkit-outer-spin-button {
     right: 0px;
     top: 10px;
     z-index: -1;
+    opacity: 0;
   }
 
   .radio_section {
@@ -121,12 +121,18 @@ input[type="number"]::-webkit-outer-spin-button {
   .toggleRadios {
     transform: translateX(95px);
     z-index: 0;
-    transition-property: transform, z-index;
-    transition-duration: 0.5s, 1s;
-    transition-delay: 0s, 0.5s;
+    opacity: 1;
+    transition-property: transform, z-index, opacity;
+    transition-duration: 0.5s, 1s, 0.7s;
+    transition-delay: 0s, 0.5s, 0.3s;
   }
   .parrafo {
     animation: fadeIn 0.5s ease 0s 1;
+    padding: 10px;
+    margin-bottom: 10px;
+    background: rgb(151, 151, 209);
+    border-radius: 10px;
+    font-size: 1.2rem;
   }
 }
 
